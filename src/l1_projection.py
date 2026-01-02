@@ -13,15 +13,18 @@ def project_l1_ball(v: np.ndarray, t: float) -> np.ndarray:
     v : np.ndarray, shape (p,)
         Input vector
     t : float
-        L1 ball radius (must be positive)
+        L1 ball radius (must be non-negative)
         
     Returns
     -------
     z : np.ndarray, shape (p,)
         Projection of v onto the L1 ball
     """
-    if t <= 0:
-        raise ValueError("Radius t must be positive")
+    if t < 0:
+        raise ValueError("Radius t must be non-negative")
+    
+    if t == 0:
+        return np.zeros_like(v)
     
     # If already in the ball, return as is
     if np.sum(np.abs(v)) <= t:

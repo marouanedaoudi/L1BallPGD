@@ -49,12 +49,15 @@ def test_projection_sparse():
     print("✓ test_projection_sparse passed")
 
 def test_projection_sign_preservation():
-    """Test that projection preserves signs"""
+    """Test that projection preserves signs for non-zero entries"""
     v = np.array([3.0, -2.0, 1.0, -4.0])
     t = 5.0
     z = project_l1_ball(v, t)
-    assert np.all(np.sign(z) == np.sign(v))
+    # Only check sign preservation for non-zero entries in z
+    non_zero_mask = np.abs(z) > 1e-10
+    assert np.all(np.sign(z[non_zero_mask]) == np.sign(v[non_zero_mask]))
     print("✓ test_projection_sign_preservation passed")
+
 
 if __name__ == "__main__":
     test_projection_identity()
