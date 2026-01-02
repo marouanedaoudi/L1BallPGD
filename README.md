@@ -47,6 +47,31 @@ $$
 for a threshold $\theta \ge 0$ chosen so that $\|z\|_1 = t$.
 The threshold can be found efficiently from the sorted values of $|v_i|$.
 
+## Results
+
+On synthetic data with $n=100$, $p=200$, and true sparsity of 10:
+
+![Results](outputs/results.png)
+
+The algorithm converges in ~120 iterations. The loss decreases rapidly and the estimated sparsity converges to the true value.
+
+## Repository layout
+
+```text
+src/
+  l1_projection.py
+  pgd_constrained_lasso.py
+  data.py
+  metrics.py
+scripts/
+  run_synth.py
+tests/
+  test_l1_projection.py
+  test_pgd.py
+outputs/
+  results.png
+```
+
 ## How to run
 
 ```bash
@@ -54,3 +79,9 @@ python -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
 python scripts/run_synth.py
+```
+
+## Reference
+
+- John Duchi, Shai Shalev-Shwartz, Yoram Singer, and Tushar Chandra.
+  Efficient Projections onto the l1-Ball for Learning in High Dimensions, ICML 2008.
