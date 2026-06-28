@@ -1,5 +1,11 @@
 # L1BallPGD
 
+[![CI](https://github.com/marouanedaoudi/L1BallPGD/actions/workflows/ci.yml/badge.svg)](https://github.com/marouanedaoudi/L1BallPGD/actions/workflows/ci.yml)
+[![Python](https://img.shields.io/badge/python-3.9%20%7C%203.10%20%7C%203.11%20%7C%203.12-blue)](https://www.python.org/)
+[![Code style: ruff](https://img.shields.io/badge/code%20style-ruff-261230.svg)](https://github.com/astral-sh/ruff)
+[![Checked with mypy](https://img.shields.io/badge/mypy-checked-2a6db2.svg)](https://mypy-lang.org/)
+[![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
+
 Projected Gradient Descent (PGD) for constrained sparse regression (constrained Lasso):
 
 $$
@@ -72,13 +78,29 @@ outputs/
   results.png
 ```
 
-## How to run
+## Installation
 
 ```bash
 python -m venv .venv
 source .venv/bin/activate
-pip install -r requirements.txt
+pip install -e .          # add ".[dev]" for the test/lint toolchain
+```
+
+## How to run
+
+```bash
 python scripts/run_synth.py
+```
+
+## Development
+
+```bash
+pip install -e ".[dev]"
+pre-commit install        # optional: run checks on each commit
+ruff check .              # lint
+ruff format .             # format
+mypy                      # type check
+pytest                    # tests with coverage
 ```
 
 ## Reference
