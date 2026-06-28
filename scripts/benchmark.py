@@ -57,9 +57,6 @@ def main() -> None:
     ax = axes[0]
     ax.semilogy(gap_pgd, label="PGD", linewidth=2)
     ax.semilogy(gap_fista, label="FISTA", linewidth=2)
-    kk = np.arange(1, len(gap_pgd) + 1)
-    ax.semilogy(gap_pgd[0] / kk, "--", color="gray", alpha=0.7, label=r"$O(1/k)$")
-    ax.semilogy(gap_fista[0] / kk**2, ":", color="black", alpha=0.7, label=r"$O(1/k^2)$")
     ax.set_xlabel("Iteration")
     ax.set_ylabel(r"Objective gap $f(\beta_k) - f^\star$")
     ax.set_title("Convergence: PGD vs FISTA")

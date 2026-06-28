@@ -93,8 +93,9 @@ iterations.
 
 ![Benchmark](outputs/benchmark.png)
 
-*Left:* objective gap $f(\beta_k) - f^\star$ on a log scale, with the theoretical
-$O(1/k)$ and $O(1/k^2)$ guides. *Right:* the FISTA estimate against the true coefficients.
+*Left:* objective gap $f(\beta_k) - f^\star$ on a log scale — FISTA reaches a given
+accuracy in markedly fewer iterations. *Right:* the FISTA estimate against the true
+coefficients.
 
 ## Validation
 
