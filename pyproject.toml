@@ -38,11 +38,11 @@ Repository = "https://github.com/marouanedaoudi/L1BallPGD"
 
 [tool.setuptools.packages.find]
 where = ["."]
-include = ["src*"]
+include = ["l1ballpgd*"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
-addopts = "-v --cov=src --cov-report=term-missing"
+addopts = "-v --cov=l1ballpgd --cov-report=term-missing"
 
 [tool.ruff]
 line-length = 100
@@ -56,4 +56,4 @@ warn_unused_ignores = true
 warn_redundant_casts = true
 disallow_untyped_defs = true
 ignore_missing_imports = true
-files = ["src"]
+files = ["l1ballpgd"]

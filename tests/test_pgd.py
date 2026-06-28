@@ -1,7 +1,7 @@
 import numpy as np
 
-from src.data import generate_synthetic_data
-from src.pgd_constrained_lasso import pgd_l1_constrained
+from l1ballpgd.data import generate_synthetic_data
+from l1ballpgd.pgd_constrained_lasso import pgd_l1_constrained
 
 
 def test_pgd_convergence():

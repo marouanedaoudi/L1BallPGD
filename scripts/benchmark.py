@@ -8,18 +8,17 @@ Two things are produced:
    We fit ``sklearn.linear_model.Lasso``, read off t, then check that our PGD
    and FISTA solvers recover the same coefficients.
 
-2. A convergence comparison of PGD vs FISTA on the objective gap f(beta_k) - f*,
-   illustrating the O(1/k) vs O(1/k^2) rates.
+2. A convergence comparison of PGD vs FISTA on the objective gap f(beta_k) - f*.
 """
 
 import matplotlib.pyplot as plt
 import numpy as np
 from sklearn.linear_model import Lasso
 
-from src.data import generate_synthetic_data
-from src.fista_constrained_lasso import fista_l1_constrained
-from src.metrics import compute_loss
-from src.pgd_constrained_lasso import pgd_l1_constrained
+from l1ballpgd.data import generate_synthetic_data
+from l1ballpgd.fista_constrained_lasso import fista_l1_constrained
+from l1ballpgd.metrics import compute_loss
+from l1ballpgd.pgd_constrained_lasso import pgd_l1_constrained
 
 OUT_DIR = "outputs"
 

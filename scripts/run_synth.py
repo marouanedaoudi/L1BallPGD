@@ -1,9 +1,9 @@
 import matplotlib.pyplot as plt
 import numpy as np
 
-from src.data import generate_synthetic_data
-from src.metrics import compute_error
-from src.pgd_constrained_lasso import pgd_l1_constrained
+from l1ballpgd.data import generate_synthetic_data
+from l1ballpgd.metrics import compute_error
+from l1ballpgd.pgd_constrained_lasso import pgd_l1_constrained
 
 # Generate data
 n, p = 100, 200

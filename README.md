@@ -122,7 +122,7 @@ pip install -e ".[bench]"        # + scikit-learn for the benchmark
 
 ```python
 import numpy as np
-from src.fista_constrained_lasso import fista_l1_constrained
+from l1ballpgd.fista_constrained_lasso import fista_l1_constrained
 
 X = np.random.default_rng(0).standard_normal((100, 200))
 y = X @ np.r_[np.ones(10), np.zeros(190)] + 0.1 * np.random.default_rng(1).standard_normal(100)
@@ -142,7 +142,7 @@ python scripts/benchmark.py      # PGD vs FISTA + scikit-learn validation
 ## Project layout
 
 ```text
-src/
+l1ballpgd/
   l1_projection.py            exact Euclidean projection onto the L1 ball
   pgd_constrained_lasso.py    projected gradient descent
   fista_constrained_lasso.py  accelerated (FISTA) variant

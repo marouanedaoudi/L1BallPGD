@@ -1,6 +1,6 @@
 import numpy as np
 
-from src.l1_projection import project_l1_ball
+from l1ballpgd.l1_projection import project_l1_ball
 
 
 def test_projection_identity():

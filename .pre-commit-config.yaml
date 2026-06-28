@@ -19,4 +19,4 @@ repos:
     hooks:
       - id: mypy
         additional_dependencies: [numpy]
-        files: ^src/
+        files: ^l1ballpgd/
