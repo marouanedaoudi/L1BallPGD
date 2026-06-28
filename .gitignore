@@ -6,3 +6,9 @@ venv/
 .DS_Store
 outputs/*.png
 outputs/*.pdf
+.coverage
+.coverage.*
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+*.egg-info/
