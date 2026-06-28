@@ -35,46 +35,55 @@ what the benchmark exploits to check correctness (see [Validation](#validation))
 
 ## Algorithms
 
-**Gradient.**
+Write $P_t$ for the Euclidean projection onto the ball $\lVert\beta\rVert_1 \le t$
+(computed exactly — see [The L1-ball projection](#the-l1-ball-projection)). The loss and
+its gradient are
 
 $$
+f(\beta) = \tfrac12\lVert y - X\beta\rVert_2^2,
+\qquad
 \nabla f(\beta) = X^\top (X\beta - y).
 $$
 
-The gradient is Lipschitz with constant $L = \lVert X \rVert_2^2$, so a fixed step
+The gradient is Lipschitz with constant $L = \lVert X\rVert_2^2$, so the constant step
 $\eta = 1/L$ is safe.
 
-**PGD** — iterate gradient step + projection:
+**PGD** alternates one gradient step and one projection:
 
 $$
-\beta^{k+1} = \Pi_{\lVert\cdot\rVert_1 \le t}\!\big(\beta^k - \eta\,\nabla f(\beta^k)\big),
+\beta^{k+1} = P_t\big(\beta^k - \eta\,\nabla f(\beta^k)\big),
 \qquad f(\beta^k) - f^\star = O(1/k).
 $$
 
-**FISTA** — add a Nesterov momentum term on an extrapolated point $z^k$:
+**FISTA** evaluates the gradient at an extrapolated point $z^k$ and adds Nesterov momentum:
 
 $$
-\beta^{k+1} = \Pi_{\lVert\cdot\rVert_1 \le t}\!\big(z^k - \eta\,\nabla f(z^k)\big),
+\beta^{k+1} = P_t\big(z^k - \eta\,\nabla f(z^k)\big),
 \qquad
-z^{k+1} = \beta^{k+1} + \tfrac{\theta_k - 1}{\theta_{k+1}}\big(\beta^{k+1} - \beta^k\big),
+z^{k+1} = \beta^{k+1} + \frac{\theta_k - 1}{\theta_{k+1}}\big(\beta^{k+1} - \beta^k\big),
 $$
 
-with $\theta_{k+1} = \tfrac12\big(1 + \sqrt{1 + 4\theta_k^2}\big)$. Same per-iteration
-cost, improved rate $f(\beta^k) - f^\star = O(1/k^2)$.
+with $\theta_{k+1} = \tfrac12\big(1 + \sqrt{1 + 4\theta_k^2}\big)$. Same cost per iteration,
+better rate $O(1/k^2)$.
 
-## Projection onto the L1 ball
+## The L1-ball projection
 
-Given $v \in \mathbb{R}^p$, the projection solves
-$\Pi_{\lVert\cdot\rVert_1\le t}(v) = \arg\min_{\lVert z\rVert_1 \le t} \tfrac12\lVert z - v\rVert_2^2$.
-If $\lVert v\rVert_1 \le t$ the projection is $v$. Otherwise it is a soft-thresholding
+$P_t(v)$ is the closest point to $v$ inside the ball:
 
 $$
-z_i = \operatorname{sign}(v_i)\,\max(\lvert v_i\rvert - \theta,\ 0),
+P_t(v) = \arg\min_{\lVert z\rVert_1 \le t}\ \tfrac12\lVert z - v\rVert_2^2 .
 $$
 
-where the threshold $\theta \ge 0$ is the unique value making $\lVert z\rVert_1 = t$. It is
-found in closed form from the sorted magnitudes $\lvert v_i\rvert$, following
-Duchi et al. (2008).
+If $\lVert v\rVert_1 \le t$ then $v$ is already feasible and $P_t(v) = v$. Otherwise the
+solution is a soft-thresholding of $v$:
+
+$$
+z_i = \mathrm{sign}(v_i)\cdot\max\big(\lvert v_i\rvert - \theta,\ 0\big),
+$$
+
+where the threshold $\theta > 0$ is the unique value making $\lVert z\rVert_1 = t$.
+Sorting the magnitudes $\lvert v_i\rvert$ yields $\theta$ in closed form, for an overall
+$O(p\log p)$ cost (Duchi et al., 2008).
 
 ## Results
 
