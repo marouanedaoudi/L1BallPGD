@@ -1,8 +1,7 @@
 import numpy as np
-import sys
-sys.path.append('.')
 
 from src.l1_projection import project_l1_ball
+
 
 def test_projection_identity():
     """Test that vectors already in the ball are unchanged"""
@@ -11,6 +10,7 @@ def test_projection_identity():
     z = project_l1_ball(v, t)
     np.testing.assert_allclose(z, v, rtol=1e-6)
     print("✓ test_projection_identity passed")
+
 
 def test_projection_norm_constraint():
     """Test that projected vector satisfies ||z||_1 = t"""
@@ -21,6 +21,7 @@ def test_projection_norm_constraint():
     np.testing.assert_allclose(l1_norm, t, rtol=1e-6)
     print("✓ test_projection_norm_constraint passed")
 
+
 def test_projection_reduces_norm():
     """Test that projection reduces L1 norm when needed"""
     v = np.array([5.0, -3.0, 2.0])
@@ -30,6 +31,7 @@ def test_projection_reduces_norm():
     assert np.sum(np.abs(v)) > t
     print("✓ test_projection_reduces_norm passed")
 
+
 def test_projection_zero_vector():
     """Test projection of zero vector"""
     v = np.zeros(10)
@@ -37,6 +39,7 @@ def test_projection_zero_vector():
     z = project_l1_ball(v, t)
     np.testing.assert_allclose(z, v, rtol=1e-6)
     print("✓ test_projection_zero_vector passed")
+
 
 def test_projection_sparse():
     """Test projection on sparse vector"""
@@ -47,6 +50,7 @@ def test_projection_sparse():
     # Should preserve sparsity pattern (zeros stay zeros)
     assert np.all((v == 0) == (z == 0)) or np.sum(np.abs(z)) < np.sum(np.abs(v))
     print("✓ test_projection_sparse passed")
+
 
 def test_projection_sign_preservation():
     """Test that projection preserves signs for non-zero entries"""
