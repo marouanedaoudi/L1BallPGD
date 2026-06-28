@@ -14,8 +14,8 @@ $$
 $$
 
 built around an exact $O(p\log p)$ Euclidean projection onto the $\ell_1$ ball.
-The package ships two solvers — vanilla **Projected Gradient Descent (PGD)** and its
-accelerated variant **FISTA** — and validates them numerically against
+The package ships two solvers vanilla **Projected Gradient Descent (PGD)** and its
+accelerated variant **FISTA** and validates them numerically against
 `scikit-learn`.
 
 ---
@@ -36,7 +36,7 @@ what the benchmark exploits to check correctness (see [Validation](#validation))
 ## Algorithms
 
 Write $P_t$ for the Euclidean projection onto the ball $\lVert\beta\rVert_1 \le t$
-(computed exactly — see [The L1-ball projection](#the-l1-ball-projection)). The loss and
+(computed exactly see [The L1-ball projection](#the-l1-ball-projection)). The loss and
 its gradient are
 
 $$
@@ -170,4 +170,4 @@ John Duchi, Shai Shalev-Shwartz, Yoram Singer, and Tushar Chandra.
 
 ## License
 
-MIT — see [LICENSE](LICENSE).
+MIT see [LICENSE](LICENSE).
